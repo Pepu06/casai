@@ -1,16 +1,15 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
 import google.generativeai as genai
+from meta_ai_api import MetaAI
 
 app = Flask(__name__)
 model = genai.GenerativeModel("gemini-1.5-pro")
 genai.configure(api_key='AIzaSyBwlhNaCmKcmpAV_aYCsxnQvhOOIV4IO7g')
+meta = MetaAI()
 
 def generate_response(user_message):
-    chat = model.start_chat(
-        history=[]
-    )
-    response = chat.send_message(user_message).text
+    response = meta.prompt(user_message)['message']
     print('Respuesta del modelo:', response)
     return response
 
