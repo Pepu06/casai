@@ -25,5 +25,9 @@ def whatsapp():
 
     return str(response)
 
+@app.route('/', methods=['GET'])
+def hello():
+    return "Hello, World!"
+
 if __name__ == '__main__':
     app.run()
